@@ -186,19 +186,62 @@ socket.onopen = function() {
 // Handle messages from the server
 socket.onmessage = function(event) {
     const message = JSON.parse(event.data);
+    const payload = message.payload;
 
     // Handle specific message types
     if (message.type === 'game_joined') {
 
+      
 
-
-        chess_game(message.id, message.player,message.color1, message.color2, message.ronda) 
+        chess_game(payload.id, payload.player, payload.color1, payload.color2, payload.round) 
 
     }
 
     else if (message.type === 'move') {
+
         
 
+
+        if (payload.castling === "Yes") {
+
+            if (moveA < moveB) {moveBlack(88,86)}
+            else {moveBlack(81,84)}
+
+
+        }
+
+
+
+
+
+
+        moveBlack(payload.moveA, payload.moveB)
+
+
+
+        if (payload.pawn_promotion !== null)  {
+
+            let promo = undefined ;
+
+            blackPieces = blackPieces.filter(piece => piece.position != 99 - moveB);
+
+            if (payload.pawn_promotion == "Queen") {promo = new Queen(color2,99 - moveB);}
+            else if (payload.pawn_promotion == "Knight") {promo = new Knight(color2,99 - moveB);}
+
+            blackPieces.push(promo);
+            
+            // Update the UI
+            let element = document.getElementById(`${99 - moveB}`);
+            let image = element.querySelector('img');
+            element.removeChild(image);
+    
+            // Paint the upgraded piece
+            paintPieces([promo]);
+
+            }
+
+        
+            turn = true;
 
 
     }
@@ -299,12 +342,10 @@ socket.onclose = function(event) {
 
 
     function handleClickJoin(event) {
-        // replace with your actual endpointconst GETendpointUrl = 'http://localhost:3310/check_created'; // replace with your actual endpoint
-    
-        
-    
-        // Replace `randomNumber` with an actual variable for the game ID, and ensure it's defined.
-         // Example ID (replace with actual value)
+      
+
+
+
         const join = document.querySelectorAll('.styled-input-2');
         const id1 = join[0].value;
         console.log(id1);
@@ -313,10 +354,12 @@ socket.onclose = function(event) {
         joinGame = {
             type: 'joinGame',
 
-            id: id1
+            payload :
+
+            {id: id1}
 
 
-        }
+        } ;
 
 
         socket.send(JSON.stringify(joinGame));
@@ -335,15 +378,6 @@ socket.onclose = function(event) {
 
    
 
-
-
-
-  /*   if (primerant) primerant.style.display = 'none';
-    if (orsection) orsection.style.display = 'none';
-    if (segunant) segunant.style.display = 'none';
-
-
- */
 
 
 
@@ -395,7 +429,7 @@ socket.onclose = function(event) {
 
 
     
-        let hay_que_mover = true;
+
         
         let turn = ronda;
     let turno; // Declare turno here
@@ -409,18 +443,7 @@ socket.onclose = function(event) {
  
 
 
-        if (turno === false) {
-
-
-
-                checkDB_and_move()
-
-
-
-
-
-
-        }
+   
 
 
 
@@ -439,13 +462,6 @@ socket.onclose = function(event) {
 
 
 
-
-    
-        // Define the endpoint URL
-        const GETendpointUrl = 'http://localhost:3310/game_moves'; // replace with your actual endpoint
-        const POSTendpointUrl = 'http://localhost:3310/game_moves'; // replace with your actual endpoint
-    
-     
 
 
 
@@ -457,103 +473,14 @@ socket.onclose = function(event) {
 
     
      
-        function getDB(turn_to_look) {
-            
-            // Construct the query string
-            const queryParams = new URLSearchParams({ id, turn_to_look }).toString();
-            const urlWithParams = `${GETendpointUrl}?${queryParams}`;
-            console.log(urlWithParams);
-        
-            // Fetch data from the endpoint
-            fetch(urlWithParams)
-                .then(response => response.json()) // Parse JSON directly
-                .then(data => {
+
+
                     
-                    
-                    
-                   
-                    if (hay_que_mover && data.length > 0) {
-                        
-                        console.log("Movement found",data[0])
-                        
-                        moveA = data[0].moveA;
-                        moveB = data[0].moveB;
-                        
-    
-                        if (data[0].castling === "Yes") {
-
-                            if (moveA < moveB) {moveBlack(88,86)}
-                            else {moveBlack(81,84)}
-
-
-                        }
-
-                        
-                        
-    
-                        moveBlack(moveA,moveB);
-
-                        if (data[0].pawn_promotion !== null)  {
-
-                        let promo = undefined ;
-
-                        blackPieces = blackPieces.filter(piece => piece.position != 99 - moveB);
-
-                        if (data[0].pawn_promotion == "Queen") {promo = new Queen(color2,99 - moveB);}
-                        else if (data[0].pawn_promotion == "Knight") {promo = new Knight(color2,99 - moveB);}
-
-                        blackPieces.push(promo);
-                        
-                        // Update the UI
-                        let element = document.getElementById(`${99 - moveB}`);
-                        let image = element.querySelector('img');
-                        element.removeChild(image);
-                
-                        // Paint the upgraded piece
-                        paintPieces([promo]);
-
-                        }
-    
-                        
-    
-                        hay_que_mover = false;
-                         
-                        turno = true; 
-                        
-                        clearInterval(intervalId);  
-                        
-                    }
-                })
-                .catch(error => console.error('Fetch error:', error));
-        }
         
         
     
-        function postData(id, player, moveA, moveB, turn, pawn_promotion, castling) {
-            
-            
-            fetch(POSTendpointUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({id, player, moveA, moveB, turn, pawn_promotion, castling}),
-            })
-            .then(response => response.text()) // Handle response as text
-            .then(data => console.log('Data inserted successfully:', data))
-            .catch(error => console.error('Error:', error));
-        }
+        
     
-    
-        function checkDB_and_move() {
-    
-            
-             
-            intervalId = setInterval(() => getDB(turn - 1), 1000);
-            
-            
-            
-        }
         
         function moveBlack(A,B) {
     
@@ -1524,7 +1451,7 @@ socket.onclose = function(event) {
                 console.log("ajsdjf");
                 console.log(pawn_promotion);
 
-                postData(id, player, moveA, moveB, turn, pawn_promotion, castle);
+                socket.send(JSON.stringify({type: 'move', payload : {id, player, moveA, moveB, turn, pawn_promotion, castle}}));
 
                 pawn_promotion = null;
                 

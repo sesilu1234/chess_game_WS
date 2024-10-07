@@ -34,7 +34,8 @@ wss.on('connection', (ws) => {
   // Handle messages (moves)
   ws.on('message', async (data) => {
     try {
-        const message = JSON.parse(data); // Assuming the data is in JSON format
+        const message = JSON.parse(data); 
+        const payload = message.payload;// Assuming the data is in JSON format
         
         switch (message.type) {
             
@@ -67,22 +68,31 @@ wss.on('connection', (ws) => {
             case 'join_game':
                 // Handle action2
                 
-                sendJSON = games.filter(games => games.id == message.id);
-                clients.find(client => client.id == message.id).player2 = ws;
+                const game = games.find(games => games.id == payload.id)
+                
 
-                if (sendJSON) {
+                if (game) {
                     
-                    const client = clients.find(client => client.id == message.id);
+                    const client = clients.find(client => client.id == payload.id);
+
+                    client.player2 = ws;
                     
-                    for (const player of [client.player1, client.player2]) {
-                        player.send(JSON.stringify({ type: 'start_game', message: sendJSON }));
+                    sendJSON1 = {id: game.id, player1: game.player1, color1: game.color1, player2: game.player2, color2: game.color2, round: 1}
+
+                    sendJSON2 = {id: game.id, player1: game.player2, color1: game.color2, player2: game.player1, color2: game.color1, round: 2}
+
+                    client.player1.send(JSON.stringify({ type: 'start_game', payload: sendJSON1 }));
+
+                    client.player2.send(JSON.stringify({ type: 'start_game', payload: sendJSON2 }));
+
+
                     }
                     
 
 
 
 
-                }
+                
                 else {
                     
                     ws.send(JSON.stringify({ type: 'message', message: 'No such game found.' }));
@@ -95,13 +105,25 @@ wss.on('connection', (ws) => {
 
                 break;
 
-            case 'action3':
-                // Handle action3
-                await handleAction3(message.payload);
+            case 'move':
+
+            const otherPlayer = clients.find(client => client.id == message.id)
+
+            sendJSON = {id: payload.id, moveA: payload.moveA, moveB: payload.moveB, turn: payload.turn, pawn_promotion: payload.pawn_promotion, castling: payload.castling}
+
+                
+            if (otherPlayer.player1 === ws) {otherPlayer.player1.send(JSON.stringify({ type:'move', sendJSON }));}
+
+            else {otherPlayer.player2.send(JSON.stringify({ type: 'move', sendJSON }));}
+
                 break;
 
-            default:
-                console.log('Unknown action:', message.action);
+            
+            
+            
+            
+                default:
+                console.log('Unknown action:', message.type);
                 break;
         }
     } catch (error) {
