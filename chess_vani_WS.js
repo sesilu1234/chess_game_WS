@@ -152,7 +152,7 @@ const joinbutton = document.querySelector('.join-button');
 
     let shouldRun = true;
 
-    const socket = new WebSocket('ws://localhost:8080'); // Replace with your WebSocket server URL
+    const socket = new WebSocket('ws://localhost:8085'); // Replace with your WebSocket server URL
 
 
 
@@ -189,7 +189,7 @@ socket.onmessage = function(event) {
     const payload = message.payload;
 
     // Handle specific message types
-    if (message.type === 'game_joined') {
+    if (message.type === 'start_game') {
 
       
 
@@ -197,54 +197,6 @@ socket.onmessage = function(event) {
 
     }
 
-    else if (message.type === 'move') {
-
-        
-
-
-        if (payload.castling === "Yes") {
-
-            if (moveA < moveB) {moveBlack(88,86)}
-            else {moveBlack(81,84)}
-
-
-        }
-
-
-
-
-
-
-        moveBlack(payload.moveA, payload.moveB)
-
-
-
-        if (payload.pawn_promotion !== null)  {
-
-            let promo = undefined ;
-
-            blackPieces = blackPieces.filter(piece => piece.position != 99 - moveB);
-
-            if (payload.pawn_promotion == "Queen") {promo = new Queen(color2,99 - moveB);}
-            else if (payload.pawn_promotion == "Knight") {promo = new Knight(color2,99 - moveB);}
-
-            blackPieces.push(promo);
-            
-            // Update the UI
-            let element = document.getElementById(`${99 - moveB}`);
-            let image = element.querySelector('img');
-            element.removeChild(image);
-    
-            // Paint the upgraded piece
-            paintPieces([promo]);
-
-            }
-
-        
-            turn = true;
-
-
-    }
 };
 
 
@@ -289,6 +241,8 @@ socket.onclose = function(event) {
         const color1 = colorTexts[0].innerText;
         const color2 = colorTexts[1].innerText;
  
+
+
         const gameData = {
             type: 'create_game',
             payload : {
@@ -299,6 +253,8 @@ socket.onclose = function(event) {
                 color2} 
             
         };
+
+        
 
         socket.send(JSON.stringify(gameData));
 
@@ -319,7 +275,7 @@ socket.onclose = function(event) {
 
         const btncreate = document.querySelector('.styled-create');
 
-        btncreate.value = randomNumber;
+        btncreate.value = id;
     
         
     
@@ -352,7 +308,7 @@ socket.onclose = function(event) {
 
 
         joinGame = {
-            type: 'joinGame',
+            type: 'join_game',
 
             payload :
 
@@ -422,8 +378,8 @@ socket.onclose = function(event) {
         document.querySelector('.column-3').style.display = 'none';
 
         document.querySelector('.column-2').style.position = 'absolute';
-        document.querySelector('.column-2').style.top = '50%';
-        document.querySelector('.column-2').style.left = '50%';
+        document.querySelector('.column-2').style.top = '45%';
+        document.querySelector('.column-2').style.left = '46.9%';
         document.querySelector('.column-2').style.transform = 'translate(-35%, -40%)';
 
 
@@ -474,7 +430,59 @@ socket.onclose = function(event) {
     
      
 
-
+    socket.onmessage = function(event) {
+        const message = JSON.parse(event.data);
+        const payload = message.payload;
+    
+       if (message.type === 'move') {
+    
+            
+    
+    
+            if (payload.castling === "Yes") {
+    
+                if (payload.moveA < payload.moveB) {if (ronda === 1){moveBlack(88,86)} else {moveBlack(88,85)}}
+                else {if (ronda === 1){{moveBlack(81,84)}} else {moveBlack(81,83)}}
+    
+    
+            }
+    
+    
+    
+    
+    
+    
+            moveBlack(payload.moveA, payload.moveB)
+    
+    
+    
+            if (payload.pawn_promotion !== null)  {
+    
+                let promo = undefined ;
+    
+                blackPieces = blackPieces.filter(piece => piece.position != 99 - payload.moveB);
+    
+                if (payload.pawn_promotion == "Queen") {promo = new Queen(color2,99 - payload.moveB);}
+                else if (payload.pawn_promotion == "Knight") {promo = new Knight(color2,99 - payload.moveB);}
+    
+                blackPieces.push(promo);
+                
+                // Update the UI
+                let element = document.getElementById(`${99 - payload.moveB}`);
+                let image = element.querySelector('img');
+                element.removeChild(image);
+        
+                // Paint the upgraded piece
+                paintPieces([promo]);
+    
+                }
+    
+            
+                turno = true;
+    
+    
+        }
+    };
                     
         
         
@@ -1462,7 +1470,7 @@ socket.onclose = function(event) {
                 hay_que_mover = true;
                 selected = 0;
     
-                checkDB_and_move();
+                
                 
             }
         

@@ -39,8 +39,8 @@ html, body {
     height: 100vh;  /* 80% of the screen height */
     padding: 10px;
     border: 0px solid #ccc;
+    position:relative;
     
-   
 }
 
 .column-3 {
@@ -186,9 +186,9 @@ gap: 0px;
 border:10px solid #770e367b;
 border-radius: 15px;
 width: 400px;
-
+transform: scale(0.9);
 position:relative;
-top:60px;
+top:5px;
 
 }
 .grid-item {
@@ -429,7 +429,7 @@ left:10%;
 
 .PawnPromotion {
     position: relative;
-    top: 100px;
+    top: 20px;
     left: 200px;
     
     width: 160px;
