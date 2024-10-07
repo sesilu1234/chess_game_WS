@@ -381,6 +381,9 @@ socket.onclose = function(event) {
         document.querySelector('.column-2').style.top = '45%';
         document.querySelector('.column-2').style.left = '46.9%';
         document.querySelector('.column-2').style.transform = 'translate(-35%, -40%)';
+        document.querySelector('.grid-container').style.transform = 'scale(0.9)';
+        document.querySelector('.grid-container').style.display = 'grid';
+
 
 
 
