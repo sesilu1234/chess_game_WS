@@ -1,0 +1,455 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color_1: rgba(12, 38, 41, 0.25);
+    --background-color_2: rgba(132, 93, 93, 0.5);
+    --background-color_3: rgba(121, 101, 101, 0.5);
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --background-color: #b0a8a8;
+    --text-color: #333;
+}
+
+body {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive screen_1 settings */
+.screen_1 {
+
+
+    box-sizing: border-box;
+    display: flex;
+   
+    width: 971px;
+    height: 600px;
+
+    position: relative;
+
+    
+    
+    
+   
+
+}
+
+/* Centering the content in the left_column */
+.left_column {
+    border: 1px dashed #AC8740;
+    background-color: #3B312D;
+    flex: 1 1 35%;
+    
+    height: 100%;
+    
+    text-align: center;
+}
+
+.left_column h1 {
+    font-family: 'Dangrek';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 5em;
+    line-height: 100px;
+    color: #F39F5A;
+    transform: translate(-2%, 10%);
+}
+
+.red_pawn{
+
+
+width:70%;
+
+}
+
+
+.github_icon {
+    display: inline-block; 
+    position:absolute;
+    bottom : 3%;
+    left:3%;/* Makes the container fit the size of the icon */
+    font-size: 1.5em; /* Sets the size of the icon */
+    margin: 0; /* Remove margin if it exists */
+    padding: 8px 10px; /* Add padding for a nicer click area */
+    border-radius: 15px; /* Optional: round corners */
+    transition: background-color 0.4s ease, opacity 0.4s ease; /* Smooth transition for background and transform */
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.github_icon:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Lighten background on hover */
+    opacity: 1; /* Set to 1 for full opacity on hover */
+   /* Slightly scale the icon up */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+
+
+
+
+
+
+.right_column {
+    border: 1px dashed #AC8740;
+    background-color: #434141;
+    flex: 1 1 65%;
+    
+    height: 100%;
+}
+
+/* Adjusting the columns for smaller screens */
+
+
+
+.presented_1{
+    display:flex;
+    justify-content: flex-end;
+    
+
+}
+
+.presented_2{
+
+    display:flex;
+
+
+}
+
+.presented_3{
+
+
+    padding:10px 5px 10px 10px;
+
+}
+
+.presented_3 h1 {
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 20px;
+    opacity:0.8;
+   
+    
+    color: rgb(214, 29, 161);
+
+}
+
+.presented_3 h2 {
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 50;
+    opacity:0.7;
+    font-size: 1em;
+    line-height: 20px;
+   
+    
+    color: #da29a7;
+    text-align: center;
+
+}
+
+.linkedin_icon {
+
+        color: rgb(32, 160, 168,0.7);
+       display: flex;
+       justify-content: center;
+       align-items: center;
+      
+        font-size: 1.3em; /* Sets the size of the icon */
+        margin: 5px 10px 5px 0px; /* Remove margin if it exists */
+       
+        border-radius: 15px; /* Optional: round corners */
+        transition: background-color 0.4s ease, opacity 0.4s ease; /* Smooth transition for background and transform */
+        cursor: pointer;
+       
+    
+    }   
+    
+    
+    .fa-brands.fa-linkedin:hover {
+        color: rgb(13, 41, 101,0.7); /* Change to a deeper blue on hover */
+        opacity: 1; /* Full opacity on hover */
+        transform: scale(1.1); /* Slightly scale the icon up */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a glowing effect */
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .input {
+
+        margin-top: 15%;
+
+        display:flex;
+
+
+    }
+
+    .input_1{
+        
+        width:48%;
+        
+
+        display:block;
+        justify-content: center;
+
+    }
+
+
+    .input_1 h1 {       
+        display: block;
+
+        font-family: "Saira Condensed", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-family: 'Saira Condensed';
+       
+        font-size: 2.3em;
+        line-height: 20px;
+            /* or 175% */
+        text-align: center;
+        
+        color: #AE445A;
+
+    }
+
+
+    .create_inputs{
+
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .row_1 {
+        position:relative;
+        display:inline-flex;
+        
+        margin-top: 5%;
+        padding: 0px;
+    }
+
+    .row_2 {
+        position:relative;
+        display:inline-flex;
+        margin-top : 0%;
+    }
+
+    .row_3 {
+
+        display:inline-flex;
+        margin-top : 3%;
+    }
+
+
+    .simple-input {
+        width: 120px; /* Set the desired width */
+        padding: 5px 8px; /* Optional: Add some padding */
+        font-size: 14px; /* Optional: Set the font size */
+        border: 1px solid #ccc; /* Optional: Customize the border */
+        border-radius: 1px; 
+        
+        margin:7px;/* Optional: Rounded corners */
+    }
+    .simple-input2 {
+        
+        width: 100px; /* Set the desired width */
+        padding: 5px 8px; /* Optional: Add some padding */
+        font-size: 14px; /* Optional: Set the font size */
+        border: 1px solid #ccc; /* Optional: Customize the border */
+        border-radius: 1px; 
+        
+        margin:7px;/* Optional: Rounded corners */
+    }
+
+    #drop_icon {
+
+
+        position: absolute;
+        right: 20px;
+        top:30%;
+    }
+
+    .row_3 .simple-input {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+
+        width: 70px; /* Set the desired width */
+        /* Optional: Add some padding */
+        font-size: 15px; /* Optional: Set the font size */
+        font-weight: 800;
+        border: 1px solid #ccc; /* Optional: Customize the border */
+        border-radius: 5%;
+        background-color: #F39F5A;
+        
+        margin:7px;/* Optional: Rounded corners */
+        
+    }
+
+
+    .input_2 .row_2 .simple-input {
+        
+        text-align: center;
+
+        width: 150px; /* Set the desired width */
+        /* Optional: Add some padding */
+        font-size: 15px; /* Optional: Set the font size */
+        
+        border: 1px solid #ccc; /* Optional: Customize the border */
+        border-radius: 5%;
+        
+        
+        margin:7px;/* Optional: Rounded corners */
+        
+    }
+
+    .create-button {
+
+
+        margin-top: 5%;
+        background-color: #F6B93B; /* Bright yellow */
+        color: black; /* White text */
+        border: none; /* No border */
+        border-radius: 1px; /* Rounded corners */
+        padding: 8px 17px; /* Top/bottom and left/right padding */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition */
+
+        font-family: 'Lato'; /* Fallback to sans-serif if Lato is unavailable */
+    font-weight: 400; /* Regular weight */
+    }
+    
+    .create-button:hover {
+        background-color: #FFC300; /* Darker yellow on hover */
+    }
+    
+    
+    .separator{
+
+        width:2px;
+        background-color: black;
+        transform: translateX(15px);
+    }
+
+    .input_2{
+
+        width:48%;
+
+        display:block;
+        justify-content: center;
+        transform: translateY(1px);
+       
+      
+    }
+
+
+.input_2 h1 {
+
+    display: block;
+
+    font-family: "Saira Condensed", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-family: 'Saira Condensed';
+   
+    font-size: 2.3em;
+    line-height: 20px;
+        /* or 175% */
+    text-align: center;
+    
+    color: #AE445A;
+
+    }
+
+
+  
+.input_2 .row_1{
+
+
+margin:0%;
+margin-bottom: 5%;
+
+    
+}
+
+    .yellow_pawn{
+
+
+        width:35%;
+        transform: translate(90%, 0%);
+        
+        
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .screen_1 {
+        flex-direction: column;
+        height: auto;
+        width: 90vw;
+    }
+
+    .left_column,
+    .right_column {
+        width: 100%;
+        height: 50vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .screen_1 {
+        height: auto;
+        width: 95vw;
+    }
+
+    .left_column,
+    .right_column {
+        height: auto;
+    }
+}
