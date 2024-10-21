@@ -23,6 +23,11 @@ body {
     align-items: center;
 }
 
+
+
+
+
+
 /* Responsive screen_1 settings */
 .screen_1 {
 
@@ -33,14 +38,33 @@ body {
     width: 971px;
     height: 600px;
 
-    position: relative;
+    position: relative;}
 
     
     
-    
-   
 
-}
+
+.grid_container {
+    display: grid;
+    position:absolute;
+    
+    
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    gap: 0px;
+    border:10px solid #770e367b;
+    border-radius: 15px;
+    
+    transform: scale(1);
+    
+    
+    
+    }
+    .grid-item {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000000;
+    }
 
 /* Centering the content in the left_column */
 .left_column {
@@ -264,7 +288,7 @@ width:70%;
     }
 
 
-    .simple-input {
+    .simple-input, .simple-input_timer, .simple-input-join {
         width: 120px; /* Set the desired width */
         padding: 5px 8px; /* Optional: Add some padding */
         font-size: 14px; /* Optional: Set the font size */
@@ -292,7 +316,7 @@ width:70%;
         top:30%;
     }
 
-    .row_3 .simple-input {
+    .row_3 .simple-input_timer {
         font-family: 'Orbitron', sans-serif;
         text-align: center;
 
@@ -343,6 +367,27 @@ width:70%;
     }
     
     .create-button:hover {
+        background-color: #FFC300; /* Darker yellow on hover */
+    }
+
+    .join-button {
+
+
+        margin-top: 5%;
+        background-color: #F6B93B; /* Bright yellow */
+        color: black; /* White text */
+        border: none; /* No border */
+        border-radius: 1px; /* Rounded corners */
+        padding: 8px 17px; /* Top/bottom and left/right padding */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition */
+
+        font-family: 'Lato'; /* Fallback to sans-serif if Lato is unavailable */
+    font-weight: 400; /* Regular weight */
+    }
+    
+    .join-button:hover {
         background-color: #FFC300; /* Darker yellow on hover */
     }
     

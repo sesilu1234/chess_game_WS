@@ -3,7 +3,7 @@
 
 
 
-const container = document.getElementById('grid-container');
+const container = document.getElementById('grid_container');
 
 for (let row = 1; row <= 8; row++) {
     for (let col = 1; col <= 8; col++) {
@@ -40,12 +40,12 @@ function handleDivClick2(event) {
 }
 
 // Loop through all dropdown elements and add event listener to each
-myDivs[0].addEventListener('click', handleDivClick1);
+/*myDivs[0].addEventListener('click', handleDivClick1);
 myDivs[1].addEventListener('click', handleDivClick2);
 
         
 document.addEventListener('click', handleClickOutside1);
-document.addEventListener('click', handleClickOutside2);
+document.addEventListener('click', handleClickOutside2);*/
 
 
 function handleClickOutside1(event) {
@@ -230,12 +230,13 @@ socket.onclose = function(event) {
 
 // Example usage:
 
-
     // Function to handle button click
     function handleClickCreate(event) {
+
+        console.log("eiii1");
         // replace with your actual endpoint
-        let colorTexts = document.querySelectorAll('.dropdown p');
-        const inputs = document.querySelectorAll('.styled-input');
+        let colorTexts = document.querySelectorAll('.simple-input2');
+        const inputs = document.querySelectorAll('.simple-input');
         
 
 
@@ -259,7 +260,7 @@ socket.onclose = function(event) {
 
         socket.send(JSON.stringify(gameData));
 
-    
+        console.log("ID",id);
 
       
 
@@ -274,9 +275,9 @@ socket.onclose = function(event) {
 
     
 
-        const btncreate = document.querySelector('.styled-create');
+        /*const btncreate = document.querySelector('.styled-create');
 
-        btncreate.value = randomNumber;
+        btncreate.value = randomNumber;*/
     
         
     
@@ -305,7 +306,7 @@ socket.onclose = function(event) {
     
         // Replace `randomNumber` with an actual variable for the game ID, and ensure it's defined.
          // Example ID (replace with actual value)
-        const join = document.querySelectorAll('.styled-input-2');
+        const join = document.querySelectorAll('.simple-input-join');
         const id1 = join[0].value;
         console.log(id1);
 

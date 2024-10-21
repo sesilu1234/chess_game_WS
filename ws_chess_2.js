@@ -15,7 +15,7 @@ const pool = mysql.createPool({
 // Promisify the pool for async/await support
 const promisePool = pool.promise();
 
-const wss = new WebSocket.Server({ port: 8085 });
+const wss = new WebSocket.Server({ port: 8080 });
 
 let games = []; // Store ongoing games
 let clients = []; // Store all connected clients
